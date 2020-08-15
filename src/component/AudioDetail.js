@@ -52,7 +52,6 @@ export default function AudioList(props) {
   const onPressButtonPause = () => {
     if (song != null) {
       if (pause) song.pause();
-
       setPause(!pause);
     }
   };
