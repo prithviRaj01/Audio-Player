@@ -1,6 +1,6 @@
 # CrownStack
 
-### Steps to run NewApp
+### Steps to run App
 
 1.Clone the Repostiry
 
