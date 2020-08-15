@@ -11,23 +11,24 @@ export const millisToMinutesAndSeconds = (millis) => {
 };
 
 const Card = (props) => {
+  const {
+    collectionName,
+    artistName,
+    artworkUrl100,
+    trackTimeMillis,
+  } = props.data;
   return (
-    <View style={styles.renderContainer}>
-      <TouchableOpacity
-        style={styles.renderContainer}
-        onPress={() => this.onPress}>
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={props.onPress}>
         <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={{uri: props.data.artworkUrl100}}
-          />
+          <Image style={styles.image} source={{uri: artworkUrl100}} />
         </View>
         <View style={{flex: 0.7, justifyContent: 'space-around'}}>
-          <Text style={styles.collectionTxt}>{props.data.collectionName}</Text>
+          <Text style={styles.collectionTxt}>{collectionName}</Text>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.artistTxt}>{props.data.artistName}</Text>
+            <Text style={styles.artistTxt}>{artistName}</Text>
             <Text style={styles.durationTxt}>
-              {millisToMinutesAndSeconds(props.data.trackTimeMillis)}m
+              {millisToMinutesAndSeconds(trackTimeMillis)}m
             </Text>
           </View>
         </View>

@@ -8,12 +8,24 @@ import localTrack from '../common/pure.m4a';
 
 export default function AudioDetail(props) {
   const [audio] = useState(props.navigation.getParam('data'));
+  console.log('+++++++++++++++++++>>>', audio);
 
   const playbackState = usePlaybackState();
 
   useEffect(() => {
     setup();
   }, []);
+  AudioDetail.navigationOptions = {
+    title: 'Audio Detail',
+    headdingStyle: {
+      fontWeight: '300',
+      color: 'orange',
+    },
+    headerStyle: {
+      backgroundColor: '#37474F',
+    },
+    headerTitleStyle: {color: 'white'},
+  };
 
   async function setup() {
     await TrackPlayer.setupPlayer({});
@@ -40,7 +52,7 @@ export default function AudioDetail(props) {
       await TrackPlayer.add(playlistData);
       await TrackPlayer.add({
         id: audio.artistId,
-        url: audio.previewUrl,
+        url: localTrack,
         title: audio.collectionName,
         artist: audio.artistName,
         artwork: audio.artworkUrl100,
@@ -59,9 +71,9 @@ export default function AudioDetail(props) {
   return (
     <View style={styles.container}>
       <Player
-        onNext={skipToNext}
+        // onNext={skipToNext}
         style={styles.player}
-        onPrevious={skipToPrevious}
+        // onPrevious={skipToPrevious}
         onTogglePlayback={togglePlayback}
         backCover={audio.artworkUrl100}
       />
@@ -89,23 +101,23 @@ function getStateName(state) {
   }
 }
 
-async function skipToNext() {
-  try {
-    await TrackPlayer.skipToNext();
-  } catch (_) {}
-}
+// async function skipToNext() {
+//   try {
+//     await TrackPlayer.skipToNext();
+//   } catch (_) {}
+// }
 
-async function skipToPrevious() {
-  try {
-    await TrackPlayer.skipToPrevious();
-  } catch (_) {}
-}
+// async function skipToPrevious() {
+//   try {
+//     await TrackPlayer.skipToPrevious();
+//   } catch (_) {}
+// }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#37474F',
   },
   description: {
     width: '80%',

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import styles from './PlayerStyles';
 import TrackPlayer, {
   useTrackPlayerProgress,
   usePlaybackState,
@@ -79,9 +80,9 @@ export default function Player(props) {
       <Text style={styles.title}>{trackTitle}</Text>
       <Text style={styles.artist}>{trackArtist}</Text>
       <View style={styles.controls}>
-        <ControlButton title={'<<'} onPress={onPrevious} />
+        {/* <ControlButton title={'<<'} onPress={onPrevious} /> */}
         <ControlButton title={middleButtonText} onPress={onTogglePlayback} />
-        <ControlButton title={'>>'} onPress={onNext} />
+        {/* <ControlButton title={'>>'} onPress={onNext} /> */}
       </View>
     </View>
   );
@@ -97,46 +98,3 @@ Player.propTypes = {
 Player.defaultProps = {
   style: {},
 };
-
-const styles = StyleSheet.create({
-  card: {
-    width: '80%',
-    elevation: 1,
-    borderRadius: 4,
-    shadowRadius: 2,
-    shadowOpacity: 0.1,
-    alignItems: 'center',
-    shadowColor: 'black',
-    backgroundColor: 'white',
-    shadowOffset: {width: 0, height: 1},
-  },
-  cover: {
-    width: 140,
-    height: 140,
-    marginTop: 20,
-    backgroundColor: 'grey',
-  },
-  progress: {
-    height: 1,
-    width: '90%',
-    marginTop: 10,
-    flexDirection: 'row',
-  },
-  title: {
-    marginTop: 10,
-  },
-  artist: {
-    fontWeight: 'bold',
-  },
-  controls: {
-    marginVertical: 20,
-    flexDirection: 'row',
-  },
-  controlButtonContainer: {
-    flex: 1,
-  },
-  controlButtonText: {
-    fontSize: 18,
-    textAlign: 'center',
-  },
-});
