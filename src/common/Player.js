@@ -6,14 +6,7 @@ import TrackPlayer, {
   usePlaybackState,
   useTrackPlayerEvents,
 } from 'react-native-track-player';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  ViewPropTypes,
-} from 'react-native';
+import {Image, Text, TouchableOpacity, View, ViewPropTypes} from 'react-native';
 
 function ProgressBar() {
   const progress = useTrackPlayerProgress();
@@ -31,16 +24,16 @@ function ProgressBar() {
   );
 }
 
-function ControlButton({title, onPress}) {
+function ControlButton({trackName, onPress}) {
   return (
     <TouchableOpacity style={styles.controlButtonContainer} onPress={onPress}>
-      <Text style={styles.controlButtonText}>{title}</Text>
+      <Text style={styles.controlButtonText}>{trackName}</Text>
     </TouchableOpacity>
   );
 }
 
 ControlButton.propTypes = {
-  title: PropTypes.string.isRequired,
+  trackName: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
 };
 
@@ -52,17 +45,16 @@ export default function Player(props) {
   useTrackPlayerEvents(['playback-track-changed'], async (event) => {
     if (event.type === TrackPlayer.TrackPlayerEvents.PLAYBACK_TRACK_CHANGED) {
       const track = await TrackPlayer.getTrack(event.nextTrack);
-      console.log('AUDIOPRITHVI', track);
 
-      const {title, artist, artwork} = track || {};
+      const {trackName, artistName, artworkUrl100} = track || {};
 
-      setTrackTitle(title);
-      setTrackArtist(artist);
-      setTrackArtwork(artwork);
+      setTrackTitle(trackName);
+      setTrackArtist(artistName);
+      setTrackArtwork(artworkUrl100);
     }
   });
 
-  const {style, onNext, onPrevious, onTogglePlayback, backCover} = props;
+  const {style, onTogglePlayback, backCover} = props;
 
   var middleButtonText = 'Play';
 
@@ -77,8 +69,8 @@ export default function Player(props) {
     <View style={[styles.card, style]}>
       <Image style={styles.cover} source={{uri: backCover}} />
       <ProgressBar />
-      <Text style={styles.title}>{trackTitle}</Text>
-      <Text style={styles.artist}>{trackArtist}</Text>
+      <Text style={styles.title}>{trackName}</Text>
+      <Text style={styles.artist}>{artistName}</Text>
       <View style={styles.controls}>
         {/* <ControlButton title={'<<'} onPress={onPrevious} /> */}
         <ControlButton title={middleButtonText} onPress={onTogglePlayback} />
@@ -90,8 +82,8 @@ export default function Player(props) {
 
 Player.propTypes = {
   style: ViewPropTypes.style,
-  onNext: PropTypes.func.isRequired,
-  onPrevious: PropTypes.func.isRequired,
+  // onNext: PropTypes.func.isRequired,
+  // onPrevious: PropTypes.func.isRequired,
   onTogglePlayback: PropTypes.func.isRequired,
 };
 

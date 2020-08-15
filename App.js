@@ -3,6 +3,7 @@ import SplashScreen from './src/component/SplashScreen';
 import {AppRouter} from './src/route';
 import {Provider} from 'react-redux';
 import {store} from './src/reducers/store';
+import ErrorBoundary from './src/component/ErrorBoundary';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -33,9 +34,11 @@ export default class App extends React.Component {
     }
 
     return (
-      <Provider store={store}>
-        <AppRouter />
-      </Provider>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <AppRouter />
+        </Provider>
+      </ErrorBoundary>
     );
   }
 }
